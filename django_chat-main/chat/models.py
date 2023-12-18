@@ -1,7 +1,7 @@
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth import get_user_model
-
+from members.models import Members
 User = get_user_model()
 
 class Group(models.Model):
@@ -27,3 +27,16 @@ class Message(models.Model):
 	group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 
+class Room(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+
+class Room_Message(models.Model):
+		room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE)
+		user = models.ForeignKey(Members, related_name='messages', on_delete=models.CASCADE)
+		content = models.TextField()
+
+		date_added = models.DateTimeField(auto_now_add=True)
+
+		class Meta:
+			ordering = ('date_added',)
