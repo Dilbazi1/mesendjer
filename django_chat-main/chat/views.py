@@ -13,6 +13,7 @@ def home(request):
 def new_group(request):
 	u = request.user
 	new = Group.objects.create()
+	print(new)
 	new.members.add(u)
 	new.save()
 	return redirect('home')

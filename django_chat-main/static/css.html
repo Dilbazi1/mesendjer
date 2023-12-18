@@ -1,0 +1,32 @@
+.bg-success {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.chat-messages > div {
+        background-color: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-align: center;
+        font-family: system-ui, sans-serif;
+    }
+
+    .chat-messages {
+        display: flex;
+        padding: 5px;
+        background-color: #ccc;
+        border-radius: 5px;
+        flex-direction: column;
+        gap: 5px;
+        margin: 10px;
+        max-height: 150px;
+
+        /* Control snap from here */
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        scroll-snap-type: y mandatory;
+    }
+
+    .chat-messages > div:last-child {
+        scroll-snap-align: start;
+    }

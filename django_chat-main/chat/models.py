@@ -8,6 +8,7 @@ class Group(models.Model):
 	uuid = models.UUIDField(default=uuid4, editable=False)
 	members = models.ManyToManyField(User)
 
+
 	def add_user(request, user):
 		self.members.add(user)
 		self.save()

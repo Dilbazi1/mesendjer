@@ -1,33 +1,36 @@
 {% extends 'base.html' %}
 {% block title %} Home {% endblock title %}
 {% block content %}
-    <h1 style="margin-top: 3px;">Home Page</h1>
+
     <div class="p-10 lg:p-20 text-center">
-    <h1 class="text-3xl lg:text-6xl text-white">Djangochat</h1>
+    <h1 >Home Page</h1>
 </div>
 
     {% if user.is_authenticated %}
-      <h2 class="flex items-center justify-between px-4 py-6 bg-teal-800">Hi {{ user }}!</h2>
-      <a href="{% url 'logout' %}" class="text-white hover:text-gray-200" class="btn btn-secondary">Log out</a>
-      <a href="{% url 'new_group' %}" class="btn btn-secondary">New group</a>
+      <h2 class=" text-center display-4 flex items-center justify-between px-4 py-6 bg-teal-800">Hello {{ user }}. Welcome</h2>
+<div class="text-center"> <a class=" text-center  btn btn-success" href="{% url 'new_group' %}" >New group</a></div>
+
 
     <ul>
       {% for group in groups %}
-      <div id="{{ group.uuid }}">
-        <li><a>{{ group.uuid }}</a></li>
-          {% if request.user in group.members.all %}
-            <a href="{% url 'open_chat' uuid=group.uuid %}">Open</a>
-            <a href="{% url 'leave_group' uuid=group.uuid %}">Leave</a>
-            <a href="{% url 'remove_group' uuid=group.uuid %}">Delete</a>
-          {% else %}
-            <a href="{% url 'join_group' uuid=group.uuid %}">Join</a>
-          {% endif %}
-      </div>
-      {% endfor %}
-    </ul>
+      <div class="btn btn-light"  id="{{ group.uuid }}">
+
+        <li ><a >{{ group.uuid }}</a></li>
+           {% if request.user in group.members.all %}
+             <a class=" btn btn-secondary" href="{% url 'open_chat' uuid=group.uuid %}">Open</a>
+             <a class=" btn btn-secondary" href="{% url 'leave_group' uuid=group.uuid %}">Leave</a>
+             <a class=" btn btn-secondary" href="{% url 'remove_group' uuid=group.uuid %}">Delete</a>
+            {% else %}
+             <a  class=" btn btn-secondary" href="{% url 'join_group' uuid=group.uuid %}">Join</a>
+            {% endif %}
+
+       </div>
+       {% endfor %}
+
+     </ul>
 
     {% else %}
-      <h2>Hmm, who are you?</h2><a href="{% url 'login' %}" class="btn btn-secondary">Log in</a> OR <a href="{% url 'signup' %}" class="btn btn-info">Sign up</a>
+      <h2>Hmm, you must login or register.</h2><a href="{% url 'login' %}" class="btn btn-secondary">Log in</a> OR <a href="{% url 'signup' %}" class="btn btn-info">Sign up</a>
     {% endif %}
 
 {% endblock content %}
